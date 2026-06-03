@@ -368,6 +368,9 @@ function(_pw_pwpb_rpc_library NAME)
     DEPENDS
       ${arg_DEPS}
       "$ENV{PW_ROOT}/pw_rpc/py/pw_rpc/plugin.py"
+      # Python RPC plugins import pw_rpc, which requires the generated
+      # pw_rpc.protos.python (packet_pb2.py) to be built first.
+      pw_rpc.protos.python
   )
 
   # Create the library with the generated source files.
@@ -419,6 +422,9 @@ function(_pw_raw_rpc_library NAME)
     DEPENDS
       ${arg_DEPS}
       "$ENV{PW_ROOT}/pw_rpc/py/pw_rpc/plugin.py"
+      # Python RPC plugins import pw_rpc, which requires the generated
+      # pw_rpc.protos.python (packet_pb2.py) to be built first.
+      pw_rpc.protos.python
   )
 
   # Create the library with the generated source files.
@@ -555,6 +561,9 @@ function(_pw_nanopb_rpc_library NAME)
       DEPENDS
         ${arg_DEPS}
         "$ENV{PW_ROOT}/pw_rpc/py/pw_rpc/plugin.py"
+        # Python RPC plugins import pw_rpc, which requires the generated
+        # pw_rpc.protos.python (packet_pb2.py) to be built first.
+        pw_rpc.protos.python
     )
 
     # Create the library with the generated source files.
