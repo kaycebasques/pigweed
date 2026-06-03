@@ -242,8 +242,34 @@ function(_pw_generate_protos TARGET LANGUAGE)
     list(APPEND args_to_pass --plugin-path "${arg_PLUGIN}")
   endif()
 
+  # Construct PYTHONPATH for the protoc plugins.
+  set(python_paths
+      "$ENV{PW_ROOT}/pw_protobuf/py"
+      "$ENV{PW_ROOT}/pw_status/py"
+      "$ENV{PW_ROOT}/pw_protobuf_compiler/py"
+      "$ENV{PW_ROOT}/pw_rpc/py"
+      "$ENV{PW_ROOT}/pw_stream/py"
+      "$ENV{PW_ROOT}/pw_log/py"
+      "$ENV{PW_ROOT}/pw_cli/py"
+  )
+  if(NOT "${pw_protobuf_compiler_PYTHON_OUT_DIR}" STREQUAL "")
+    list(APPEND python_paths "${pw_protobuf_compiler_PYTHON_OUT_DIR}/python")
+  endif()
+
+  if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Windows")
+    set(separator ";")
+  else()
+    set(separator ":")
+  endif()
+  string(REPLACE ";" "${separator}" python_path "${python_paths}")
+
+  if(NOT "$ENV{PYTHONPATH}" STREQUAL "")
+    set(python_path "${python_path}${separator}$ENV{PYTHONPATH}")
+  endif()
+
   add_custom_command(
     COMMAND
+      ${CMAKE_COMMAND} -E env "PYTHONPATH=${python_path}"
       python3
       "${script}"
       ${args_to_pass}
