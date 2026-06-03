@@ -16,5 +16,3 @@ For more information please see our website: https://pigweed.dev/.
 - [Mailing List](https://groups.google.com/forum/#!forum/pigweed)
 - [Chat Room](https://discord.gg/M9NSeTA)
 - [Issue Tracker](https://pwbug.dev/)
-
-<!-- Hello, world! -->
