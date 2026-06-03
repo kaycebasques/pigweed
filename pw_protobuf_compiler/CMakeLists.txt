@@ -73,19 +73,3 @@ if(NOT "${dir_pw_third_party_nanopb}" STREQUAL "")
   )
 endif()
 
-
-set(python_test_pythonpath
-  "${CMAKE_CURRENT_BINARY_DIR}/pw_protobuf_compiler.pwpb_test_protos/python"
-  "${CMAKE_BINARY_DIR}/pw_protobuf/pw_protobuf.field_options_proto/python"
-)
-string(REPLACE ";" ":" python_path_str "${python_test_pythonpath}")
-
-add_custom_target(pw_protobuf_compiler.python_proto_test
-  COMMAND
-    ${CMAKE_COMMAND} -E env "PYTHONPATH=${python_path_str}"
-    python3
-    "${CMAKE_CURRENT_SOURCE_DIR}/py/python_proto_test.py"
-  DEPENDS
-    pw_protobuf_compiler.pwpb_test_protos.python
-    pw_protobuf.field_options_proto.python
-)

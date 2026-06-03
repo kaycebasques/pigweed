@@ -13,7 +13,6 @@
 # the License.
 
 load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
-load("@com_google_protobuf//bazel:py_proto_library.bzl", "py_proto_library")
 load(
     "//pw_protobuf_compiler:pw_proto_library.bzl",
     "pw_proto_filegroup",
@@ -42,9 +41,3 @@ pwpb_proto_library(
         ":pwpb_test_proto",
     ],
 )
-
-py_proto_library(
-    name = "pwpb_test_proto_py_pb2",
-    deps = [":pwpb_test_proto"],
-)
-

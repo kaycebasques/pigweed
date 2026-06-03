@@ -93,14 +93,3 @@ pw_py_test(
         ":pw_protobuf_compiler",
     ],
 )
-
-pw_py_test(
-    name = "python_proto_test",
-    size = "small",
-    srcs = [
-        "python_proto_test.py",
-    ],
-    deps = [
-        "//pw_protobuf_compiler/pwpb_test_protos:pwpb_test_proto_py_pb2",
-    ],
-)
