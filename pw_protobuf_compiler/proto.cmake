@@ -190,6 +190,33 @@ function(pw_proto_library NAME)
     OUT_DIR
       "${out_dir}"
   )
+
+  if("${NAME}" STREQUAL "pw_rpc.protos")
+    if(TARGET pw_rpc.protos._generate.pwpb)
+      add_dependencies(pw_rpc.protos._generate.pwpb
+        pw_protobuf.codegen_protos.python
+        pw_protobuf.common_proto.python
+        pw_protobuf.status_proto.python
+        pw_protobuf.field_options_proto.python
+      )
+    endif()
+    if(TARGET pw_rpc.protos._generate.nanopb)
+      add_dependencies(pw_rpc.protos._generate.nanopb
+        pw_protobuf.codegen_protos.python
+        pw_protobuf.common_proto.python
+        pw_protobuf.status_proto.python
+        pw_protobuf.field_options_proto.python
+      )
+    endif()
+    if(TARGET pw_rpc.protos._generate.nanopb_rpc)
+      add_dependencies(pw_rpc.protos._generate.nanopb_rpc
+        pw_protobuf.codegen_protos.python
+        pw_protobuf.common_proto.python
+        pw_protobuf.status_proto.python
+        pw_protobuf.field_options_proto.python
+      )
+    endif()
+  endif()
 endfunction(pw_proto_library)
 
 # Args for generate_protos.py
